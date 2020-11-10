@@ -1,0 +1,22 @@
+{
+  "name": "koa-joi-validator-middleware",
+  "version": "1.0.0",
+  "description": "Validate objects on Koa's ctx with Joi schemas",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/mocha.config.js \"./src/**/*.spec.js\""
+  },
+  "author": "Soma Erdelyi <info@somaerdelyi.net> (https://somaerdelyi.net/)",
+  "license": "ISC",
+  "peerDependencies": {
+    "joi": "^17.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "joi": "^17.3.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.1",
+    "sinon-chai": "^3.5.0"
+  }
+}
