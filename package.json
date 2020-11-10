@@ -4,7 +4,9 @@
   "description": "Validate objects on Koa's ctx with Joi schemas",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/mocha.config.js \"./src/**/*.spec.js\""
+    "test": "mocha ./test/mocha.config.js \"./src/**/*.spec.js\"",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --ext .js . --fix"
   },
   "author": "Soma Erdelyi <info@somaerdelyi.net> (https://somaerdelyi.net/)",
   "license": "ISC",
@@ -14,6 +16,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^7.13.0",
+    "eslint-plugin-no-only-tests": "^2.4.0",
+    "eslint-plugin-require-path-exists": "^1.1.9",
     "joi": "^17.3.0",
     "mocha": "^8.2.1",
     "sinon": "^9.2.1",

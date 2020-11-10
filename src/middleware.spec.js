@@ -10,7 +10,7 @@ describe('koaJoiValidatorMiddleware', () => {
     });
 
     it('should return a function when called', () => {
-      const params = {schema: {}};
+      const params = { schema: {} };
       const middleware = middlewareFactory(params);
       expect(middleware).to.be.a('function');
     });
