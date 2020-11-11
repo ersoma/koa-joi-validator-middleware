@@ -9,7 +9,7 @@
     "lint:fix": "eslint --ext .js . --fix"
   },
   "author": "Soma Erdelyi <info@somaerdelyi.net> (https://somaerdelyi.net/)",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "joi": "^17.3.0"
   },
