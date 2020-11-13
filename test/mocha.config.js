@@ -13,9 +13,9 @@ before(function() {
 });
 
 beforeEach(function() {
-  this.sandbox = sinon.createSandbox();
+  global.sandbox = sinon.createSandbox();
 });
 
 afterEach(function() {
-  this.sandbox.restore();
+  global.sandbox.restore();
 });
