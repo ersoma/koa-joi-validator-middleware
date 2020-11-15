@@ -5,7 +5,6 @@ const Joi = require('joi');
 const FakeServer = require('../fake_server');
 const koaJoiValidatorFactory = require('../../src/middleware');
 const { expect } = require('chai');
-const { assert } = require('joi');
 
 const PORT = 8080;
 const URL = `http://localhost:${PORT}`;
