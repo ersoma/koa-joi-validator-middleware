@@ -20,10 +20,10 @@ class KoaJoiValidatorMiddleware {
     try {
       const subject = this.getSubject(ctx);
       Joi.attempt(subject, this.schema);
-      await next();
     } catch (error) {
       this._handleValidationError(error);
     }
+    await next();
   }
 
   _validateParameters() {
