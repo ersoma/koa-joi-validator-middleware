@@ -4,10 +4,12 @@ const Joi = require('joi');
 
 class KoaJoiValidatorMiddleware {
   constructor(schema, {
-    onError = 'validation failed for given schema'
+    onError = 'validation failed for given schema',
+    getSubject = ctx => ctx.request.body
   }) {
     this.schema = schema;
     this.onError = onError;
+    this.getSubject = getSubject;
 
     this._validateParameters();
   }
@@ -16,7 +18,8 @@ class KoaJoiValidatorMiddleware {
     this.ctx = ctx;
     this.next = next;
     try {
-      Joi.attempt(ctx.request.body, this.schema);
+      const subject = this.getSubject(ctx);
+      Joi.attempt(subject, this.schema);
       await next();
     } catch (error) {
       this._handleValidationError(error);
@@ -31,6 +34,10 @@ class KoaJoiValidatorMiddleware {
     const onErrorIsValid = ['string', 'function'].filter(v => v === typeof this.onError).length === 1;
     if (onErrorIsValid === false) {
       throw new Error('onError parameter is invalid');
+    }
+
+    if (typeof this.getSubject !== 'function') {
+      throw new Error('getSubject parameter is invalid');
     }
   }
 

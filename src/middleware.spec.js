@@ -83,4 +83,26 @@ describe('koaJoiValidatorMiddleware', () => {
       expect(shouldThrow).to.throw('onError parameter is invalid');
     });
   });
+
+  describe('uses custom getSubject parameters', () => {
+    it('should throw error if getSubject is not a function', async () => {
+      const schema = Joi.object({ param1: Joi.string().required() });
+      const customGetSubject = 'String';
+
+      const shouldThrow = () => {
+        middlewareFactory(schema, { getSubject: customGetSubject });
+      };
+      expect(shouldThrow).to.throw('getSubject parameter is invalid');
+    });
+
+    it('should validate the object returned by getSubject', async () => {
+      const schema = Joi.object({ param1: Joi.string().required() });
+      const customGetSubject = ctx => ctx.state;
+      const fakeCtx = { state: { param1: 'string' } };
+      const fakeNext = () => {};
+
+      const middleware = middlewareFactory(schema, { getSubject: customGetSubject });
+      await expect(middleware(fakeCtx, fakeNext)).to.be.fulfilled;
+    });
+  });
 });
