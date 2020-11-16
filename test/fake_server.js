@@ -1,6 +1,7 @@
 'use strict';
 
 const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 
 class FakeServer {
   constructor(
@@ -8,6 +9,7 @@ class FakeServer {
     controller = ctx => { ctx.status = 200; }
   ) {
     const app = new Koa();
+    app.use(bodyParser());
     middlewares.forEach(middleware => app.use(middleware));
     app.use(controller);
     app.silent = true;
