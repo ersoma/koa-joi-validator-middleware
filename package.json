@@ -1,6 +1,6 @@
 {
   "name": "koa-joi-validator-middleware",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validate objects on Koa's ctx with Joi schemas",
   "main": "index.js",
   "scripts": {
