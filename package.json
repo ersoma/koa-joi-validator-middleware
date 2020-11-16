@@ -12,6 +12,20 @@
   },
   "author": "Soma Erdelyi <info@somaerdelyi.net> (https://somaerdelyi.net/)",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/ersoma/koa-joi-validator-middleware"
+  },
+  "bugs": {
+    "url": "https://github.com/ersoma/koa-joi-validator-middleware/issues"
+  },
+  "homepage": "https://github.com/ersoma/koa-joi-validator-middleware#readme",
+  "keywords": [
+    "koa",
+    "joi",
+    "validation",
+    "schema validation"
+  ],
   "peerDependencies": {
     "joi": "^17.3.0"
   },
