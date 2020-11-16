@@ -35,7 +35,6 @@ By default, only the schema parameter is needed. In this case the middleware wil
 ```JavaScript
 ...
 const schema = Joi.object({...});
-const config = {...};
 
 const app = new Koa();
 app.use(koaJoiValidator(schema));
