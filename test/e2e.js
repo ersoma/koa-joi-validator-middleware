@@ -2,8 +2,8 @@
 
 const axios = require('axios');
 const Joi = require('joi');
-const FakeServer = require('../fake_server');
-const koaJoiValidatorFactory = require('../../src/middleware');
+const FakeServer = require('./fake_server');
+const koaJoiValidatorFactory = require('../src/middleware');
 const { expect } = require('chai');
 
 const PORT = 8080;

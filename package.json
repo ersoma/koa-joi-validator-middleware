@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test:unit && npm run test:e2e",
-    "test:e2e": "mocha ./test/mocha.config.js \"./test/e2e/**/*.js\"",
+    "test:e2e": "mocha ./test/mocha.config.js \"./test/**/*.js\"",
     "test:unit": "mocha ./test/mocha.config.js \"./src/**/*.spec.js\"",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --ext .js . --fix"
