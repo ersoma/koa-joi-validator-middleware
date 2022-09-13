@@ -12,18 +12,16 @@ class KoaJoiValidatorMiddleware {
     this.getSubject = getSubject;
 
     this._validateParameters();
+
+    this.compiledSchema = Joi.compile(schema);
   }
 
   async execute(ctx, next) {
-    this.ctx = ctx;
-    this.next = next;
-    try {
-      const subject = this.getSubject(ctx);
-      Joi.attempt(subject, this.schema);
-    } catch (error) {
-      this._handleValidationError(error);
+    const validationResult = this.compiledSchema.validate(this.getSubject(ctx));
+    if (validationResult.error) {
+      return this._handleValidationError(ctx, next, validationResult.error);
     }
-    await next();
+    return next();
   }
 
   _validateParameters() {
@@ -41,19 +39,19 @@ class KoaJoiValidatorMiddleware {
     }
   }
 
-  _handleValidationError(error) {
+  _handleValidationError(ctx, next, error) {
     if (error instanceof Joi.ValidationError === false) {
       throw error;
     }
     if (typeof this.onError === 'string') {
       throw new Error(this.onError);
     } else if (typeof this.onError === 'function') {
-      this.onError(this.ctx, this.next, error);
+      this.onError(ctx, next, error);
     }
   }
 }
 
 module.exports = (schema, config = {}) => {
   const instance = new KoaJoiValidatorMiddleware(schema, config);
-  return async (ctx, next) => instance.execute(ctx, next);
+  return (ctx, next) => instance.execute(ctx, next);
 };
