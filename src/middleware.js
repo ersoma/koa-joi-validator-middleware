@@ -40,9 +40,6 @@ class KoaJoiValidatorMiddleware {
   }
 
   _handleValidationError(ctx, next, error) {
-    if (error instanceof Joi.ValidationError === false) {
-      throw error;
-    }
     if (typeof this.onError === 'string') {
       throw new Error(this.onError);
     } else if (typeof this.onError === 'function') {
