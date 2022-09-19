@@ -51,6 +51,14 @@ describe('koaJoiValidatorMiddleware', () => {
       await expect(middleware(fakeInvalidCtx, fakeNext)).to.be.rejectedWith(customError);
     });
 
+    it('should not call next in case of a custom error handler function', async () => {
+      const next = global.sandbox.stub();
+
+      const middleware = middlewareFactory(schema, { onError: () => {} });
+      await middleware(fakeInvalidCtx, next);
+      expect(next).to.have.not.been.called;
+    });
+
     it('should call onError function if body is invalid with given schema', async () => {
       const customErrorSpy = global.sandbox.spy();
       const validationError = schema.validate(fakeInvalidCtx.request.body);
