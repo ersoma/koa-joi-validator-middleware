@@ -43,7 +43,7 @@ class KoaJoiValidatorMiddleware {
     if (typeof this.onError === 'string') {
       throw new Error(this.onError);
     } else if (typeof this.onError === 'function') {
-      this.onError(ctx, next, error);
+      return this.onError(ctx, next, error);
     }
   }
 }
