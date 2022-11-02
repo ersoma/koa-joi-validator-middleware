@@ -7,9 +7,10 @@ const { expect } = require('chai');
 
 describe('koaJoiValidatorMiddleware', () => {
   const schema = Joi.object({ param1: Joi.string().required() });
+  const schemaAsync = Joi.object({ param1: Joi.string().external(async (value) => value) });
   const fakeInvalidCtx = { request: { body: { param1: 1234 } } };
   const fakeValidCtx = { request: { body: { param1: 'test' } } };
-  const fakeNext = () => {};
+  const fakeNext = () => {};
 
   describe('works as a Koa middleware', () => {
     it('should export a factory function', () => {
@@ -32,6 +33,15 @@ describe('koaJoiValidatorMiddleware', () => {
       const next = global.sandbox.stub();
 
       const middleware = middlewareFactory(schema);
+      await middleware(fakeValidCtx, next);
+
+      expect(next).to.be.calledOnce;
+    });
+
+    it.skip('should support external custom validators', async () => {
+      const next = global.sandbox.stub();
+
+      const middleware = middlewareFactory(schemaAsync);
       await middleware(fakeValidCtx, next);
 
       expect(next).to.be.calledOnce;
