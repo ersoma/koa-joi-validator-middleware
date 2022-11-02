@@ -38,7 +38,7 @@ describe('koaJoiValidatorMiddleware', () => {
       expect(next).to.be.calledOnce;
     });
 
-    it.skip('should support external custom validators', async () => {
+    it('should support external custom validators', async () => {
       const next = global.sandbox.stub();
 
       const middleware = middlewareFactory(schemaAsync);
