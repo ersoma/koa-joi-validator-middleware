@@ -17,11 +17,19 @@ class KoaJoiValidatorMiddleware {
   }
 
   async execute(ctx, next) {
-    const validationResult = this.compiledSchema.validate(this.getSubject(ctx));
+    const validationResult = await this._validateRequest(ctx);
     if (validationResult.error) {
       return this._handleValidationError(ctx, next, validationResult.error);
     }
     return next();
+  }
+
+  async _validateRequest(ctx) {
+    try {
+      return await this.compiledSchema.validateAsync(this.getSubject(ctx));
+    } catch (error) {
+      return { error };
+    }
   }
 
   _validateParameters() {
